@@ -1,68 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>User Login</title>
+    
     <style>
-        
         body {
             /* Font style update */
             font-family: "Segoe UI", Arial, sans-serif;
-            color: #797777; /* Default text color */
+            color:#8a2be2;
             margin: 0;
             padding: 0;
             
-            background-color: #CFC0F2; 
+            background-color:#ba9cfc;
             
             display: flex;
-            justify-content: center; /* Center Horizontally */
-            align-items: center; /* Center Vertically */
+            justify-content: center;
+            align-items: center;
             min-height: 100vh;
             
-            direction: ltr; 
+            direction: ltr;
             text-align: left;
         }
 
         h2 {
-            color: #F6D883; 
+            color: #8a2be2;
             text-align: center;
             margin-bottom: 25px;
             font-size: 2em;
         }
+        
+        
         .container {
-            background-color: #fff;
+            background-color: #ffffff; /* White background */
             padding: 30px;
-            border-radius: 8px;
             /* Shadow for the focused box */
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); 
+            border-radius: 8px;
             width: 100%;
-            /* Optimized width for the login form */
-            max-width: 400px; 
+            max-width: 400px;
+            margin: 10px; 
         }
 
         label {
             display: block;
             margin-bottom: 5px;
             font-weight: bold;
-            color: #797777; /* Label color */
+            color: #797777;
         }
         
-        input[type="email"], input[type="password"] {
+        input[type="email"], 
+        input[type="password"],
+        input[type="text"] {
             width: 100%;
             padding: 12px;
             margin-bottom: 20px;
-            border: 1px solid #ccc;
+            border: 1px solid #eee;
+            background-color: #ffffff;
+            color: #797777;
             border-radius: 4px;
             box-sizing: border-box;
             font-size: 1em;
-            text-align: left; 
+            text-align: left;
         }
 
         button {
             width: 100%;
             padding: 12px;
-            /* Button background color (Your Accent 2: #CFC0F2) */
-            background-color: #CFC0F2; 
-            color: #797777; /* Button text color */
+            background-color: #F6D883;
+            color: #8a2be2;
             border: none;
             border-radius: 4px;
             cursor: pointer;
@@ -71,32 +77,59 @@
         }
 
         button:hover {
-            /* Hover color (Your Accent 1: #F6D883) */
-            background-color: #F6D883; 
-            color: #333; /* Darker text on hover for contrast */
+            background-color:#8a2be2;
+            color:#ffffff;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div id="login-section">
-            <h2>User Login</h2>
-            
-            <div id="login-message" class="message hidden"></div>
-            
-            <label for="email">Email:</label>
-            <input type="email" id="email" value="user@example.com" required>
-            
-            <label for="password">Password:</label>
-            <input type="password" id="password" value="password123" required>
-            
-            <button onclick="loginUser()">Log In</button>
-        </div>
-        
-       
+    <div id="login-container" class="container">
+        <h2>Log In</h2>
+        <form id="login-form" action="/login" method="POST">
+            <div>
+                <label for="login-email">Email:</label>
+                <input type="email" id="login-email" name="email" required>
+            </div>
+            <div>
+                <label for="login-password">Password:</label>
+                <input type="password" id="login-password" name="password" required>
+            </div>
+            <button type="submit">Log In</button>
+        </form>
+        <p>
+            Don't have an account? 
+            <a href="#" onclick="showSignupForm()">Sign Up</a>
+        </p>
     </div>
-    
-    <script src="script.js"></script>
+
+    <div id="signup-container" class="container" style="display:none;">
+        <h2>Sign Up</h2>
+        <form id="signup-form" action="/signup" method="POST">
+            <div>
+                <label for="signup-username">Username:</label>
+                <input type="text" id="signup-username" name="username" required>
+            </div>
+            <div>
+                <label for="signup-email">Email:</label>
+                <input type="email" id="signup-email" name="email" required>
+            </div>
+            <div>
+                <label for="signup-password">Password:</label>
+                <input type="password" id="signup-password" name="password" required>
+            </div>
+             <div>
+                <label for="signup-confirm-password">Confirm Password:</label>
+                <input type="password" id="signup-confirm-password" name="confirm-password" required>
+            </div>
+            <button type="submit">Create Account</button>
+        </form>
+        <p>
+            Already have an account? 
+            <a href="#" onclick="showLoginForm()">Log In</a>
+        </p>
+    </div>
+
+    <script src="scriptp.js"></script>
 </body>
 </html>
