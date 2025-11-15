@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Child Profile - Majid</title> 
+    <!-- تحميل الخطوط -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Bungee+Shade&display=swap" rel="stylesheet">
+    <!-- أيقونات Font Awesome (لصورة الملف الشخصي) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style_profileKids.css">
+   
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <img src="path/to/your/logo.png" alt=" Logo Auns">
+
+        <nav>
+            <a href="HomePage.html">Home</a>
+            <a href="">Features</a>
+            <a href="">About Us</a>
+            <a href="">Contact Us</a>
+            <a href="/signup" class="signup-button">Sign Up / Log In</a>
+        </nav>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="profile-main">
+        <!-- New Title Added Here -->
+        <h2 class="main-card-title">Child Profile</h2>
+
+        <div class="profile-card">
+            
+            <!-- Profile Picture and Level Badge (Added for Visual Consistency) -->
+            <div class="profile-picture-container">
+                <!-- Placeholder Image (Using an icon as a simple placeholder) -->
+                <div class="profile-picture" style="background-color: #f0f0f0;">
+                    <i class="fas fa-child fa-5x" style="color: var(--color-primary-fun);"></i>
+                </div>
+                <span class="level-badge">Level 12</span>
+            </div>
+            
+            <!-- Your Form Content -->
+            <div class="form-group-profile">
+                <label for="childName">Child's Name:</label>
+                <input type="text" id="childName"  placeholder="Enter child's full name">
+            </div>
+            
+            <div class="child-details-grid">
+                <div class="detail-item-input">
+                    <label for="childAge" class="detail-label-input">Child's Age:</label>
+                    <input type="number" id="childAge"  min="3" max="12" placeholder="Age">
+                </div>
+                
+                <div class="detail-item-input">
+                    <label for="parentName" class="detail-label-input">Parent/Guardian Name:</label>
+                    <input type="text" id="parentName"  placeholder="Parent's Name">
+                </div>
+            </div>
+
+            <p class="child-slogan">"You can update the profile details here."</p>
+            
+            <!-- Button is now wrapped in a container to ensure centering -->
+            <div class="save-button-container">
+                 <!-- Added onclick handler to the button -->
+                 <button class="save-button" id="saveButton">Save Changes</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Floating Status Message -->
+    <div id="statusMessage" class="status-message" aria-live="polite"></div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 AUNS</p>
+    </footer>
+
+    <!-- Firebase Imports -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Set Firebase logging level (optional, but good for debugging)
+        setLogLevel('Debug');
+
+        // Global variables provided by the Canvas environment
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        let db, auth, userId = null;
+
+        /**
+         * Displays a status message (success or error) to the user.
+         * @param {string} message - The message to display.
+         * @param {string} type - 'success' or 'error'.
+         */
+        function showStatus(message, type) {
+            const statusElement = document.getElementById('statusMessage');
+            statusElement.textContent = message;
+            statusElement.className = `status-message show ${type}`;
+            
+            setTimeout(() => {
+                statusElement.classList.remove('show');
+            }, 3000); // Hide after 3 seconds
+        }
+
+        /**
+         * Initializes Firebase and authenticates the user.
+         */
+        async function initializeFirebase() {
+            try {
+                if (Object.keys(firebaseConfig).length === 0) {
+                    throw new Error("Firebase configuration is missing.");
+                }
+
+                const app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+
+                // Authenticate the user
+                if (initialAuthToken) {
+                    await signInWithCustomToken(auth, initialAuthToken);
+                } else {
+                    await signInAnonymously(auth);
+                }
+
+                // Wait for auth state change to confirm user ID
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        userId = user.uid;
+                        // Load existing profile data on successful login
+                        loadProfileData();
+                        console.log("Firebase initialized. User ID:", userId);
+                    } else {
+                        userId = 'anonymous_user'; // Fallback if needed
+                        console.log("Firebase initialized. Anonymous sign-in.");
+                    }
+                });
+
+                document.getElementById('saveButton').addEventListener('click', saveProfile);
+                
+            } catch (error) {
+                console.error("Error initializing Firebase or authentication:", error);
+                showStatus("Failed to initialize the app. Check console for details.", 'error');
+            }
+        }
+
+        /**
+         * Gets the Firestore document path for the child's profile (Private Data).
+         * @returns {string} The document reference path.
+         */
+        function getProfileDocRef() {
+            if (!userId) {
+                console.error("User ID not available.");
+                return null;
+            }
+            // Private data path: /artifacts/{appId}/users/{userId}/{collectionName}/{documentId}
+            // We'll use 'childProfile' as the collection and a fixed ID for the single child profile.
+            return doc(db, 'artifacts', appId, 'users', userId, 'profiles', 'childProfileData');
+        }
+
+
+        /**
+         * Loads the child's profile data from Firestore and populates the form.
+         */
+        async function loadProfileData() {
+            const profileRef = getProfileDocRef();
+            if (!profileRef) return;
+
+            try {
+                const docSnap = await getDoc(profileRef);
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    document.getElementById('childName').value = data.childName || '';
+                    document.getElementById('childAge').value = data.childAge || '';
+                    document.getElementById('parentName').value = data.parentName || '';
+                    showStatus("Profile data loaded successfully.", 'success');
+                } else {
+                    console.log("No existing profile data found.");
+                }
+            } catch (error) {
+                console.error("Error loading profile data:", error);
+                showStatus("Error loading data.", 'error');
+            }
+        }
+
+
+        /**
+         * Saves the child's profile data to Firestore.
+         */
+        async function saveProfile() {
+            const profileRef = getProfileDocRef();
+            if (!profileRef) {
+                showStatus("Error: User not authenticated.", 'error');
+                return;
+            }
+
+            const childName = document.getElementById('childName').value.trim();
+            const childAge = parseInt(document.getElementById('childAge').value.trim());
+            const parentName = document.getElementById('parentName').value.trim();
+
+            if (!childName || isNaN(childAge) || !parentName) {
+                showStatus("Please fill in all fields (Name, Age, Parent Name).", 'error');
+                return;
+            }
+
+            const profileData = {
+                childName: childName,
+                childAge: childAge,
+                parentName: parentName,
+                lastUpdated: new Date().toISOString()
+            };
+
+            try {
+                // Use setDoc with merge: true to update or create the document
+                await setDoc(profileRef, profileData, { merge: true });
+                showStatus("Child profile saved successfully!", 'success');
+            } catch (error) {
+                console.error("Error saving profile:", error);
+                showStatus("Failed to save profile. Please try again.", 'error');
+            }
+        }
+
+        // Start initialization on window load
+        window.onload = initializeFirebase;
+    </script>
+</body>
+</html>

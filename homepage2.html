@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Sen:wght@400;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <title>Auns - Home</title>
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="navbar-container">
+            <div class="logo-container">
+                <img class="logo-img" src="logo-auns.png" alt="Auns Logo">
+            </div>
+            
+            <div class="menu-container">
+                <ul class="menu-list">
+                    <li class="menu-list-item active">Home</li>
+                    
+                    <li class="menu-list-item"><a href="#contact-section" style="text-decoration: none; color: inherit;">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <div class="profile-container">
+                <i class="fas fa-search nav-icon"></i> 
+                <i class="fas fa-cog nav-icon"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="content-container">
+            
+            <div class="featured-content"
+                style="background: linear-gradient(to bottom, rgba(0,0,0,0), #151515), url('backgroundhp.png');">
+                <img class="featured-title" src="img/f-t-1.png" alt="">
+               
+              
+            </div>
+
+           <div class="movie-list-container">
+                <h1 class="movie-list-title">New Releases</h1>
+                <div class="movie-list-wrapper">
+                    <div class="movie-list">
+                    
+                        <div class="movie-list-item">
+                            <img class="movie-list-item-img" src="mansour7.png" alt="Mansour Episode 7">
+                            <span class="movie-list-item-title">mansour p7</span>
+                            <p class="movie-list-item-desc">Watch episode 7 of the Mansour series.</p>
+                            <button class="movie-list-item-button">Watch</button>
+                        </div>
+                        <div class="movie-list-item">
+                            <img class="movie-list-item-img" src="mansour6.png" alt="Mansour Episode 6">
+                            <span class="movie-list-item-title">mansour p6</span>
+                            <p class="movie-list-item-desc">Watch episode 6 of the Mansour series.</p>
+                            <button class="movie-list-item-button">Watch</button>
+                        </div>
+                        <div class="movie-list-item">
+                            <img class="movie-list-item-img" src="mansour3.png" alt="Mansour Episode 3">
+                            <span class="movie-list-item-title">mansour p3</span>
+                            <p class="movie-list-item-desc">Watch episode 3 of the Mansour series.</p>
+                            <button class="movie-list-item-button">Watch</button>
+                        </div>
+                        <div class="movie-list-item">
+                            <img class="movie-list-item-img" src="ZakiyaAlzakiyap2.png" alt="Zakiya Alzakiya Episode 2">
+                            <span class="movie-list-item-title">Zakiya Alzakiya p2</span>
+                            <p class="movie-list-item-desc">Watch episode 2 of the Zakiya series.</p>
+                            <button class="movie-list-item-button">Watch</button>
+                        </div>
+                        <div class="movie-list-item">
+                            <img class="movie-list-item-img" src="KaslaanBarber.png" alt="Kaslaan at the Barber">
+                            <span class="movie-list-item-title">Kaslaan Barber</span>
+                            <p class="movie-list-item-desc">Watch the Kaslaan Barber episode.</p>
+                            <button class="movie-list-item-button">Watch</button>
+                        </div>
+                        <div class="movie-list-item">
+                            <img class="movie-list-item-img" src="KaslaanPayAttention.png" alt="Kaslaan Pay Attention">
+                            <span class="movie-list-item-title">Kaslaan Pay Attention</span>
+                            <p class="movie-list-item-desc">Watch the 'Pay Attention' episode.</p>
+                            <button class="movie-list-item-button">Watch</button>
+                        </div>
+                        <div class="movie-list-item">
+                            <img class="movie-list-item-img" src="Kaslaan1.png" alt="Kaslaan and the Lion">
+                            <span class="movie-list-item-title">Kaslaan 1</span>
+                            <p class="movie-list-item-desc">Watch Kaslaan episode 1.</p>
+                            <button class="movie-list-item-button">Watch</button>
+                        </div>
+                        
+                        </div>
+                    <i class="fas fa-chevron-right arrow"></i>
+                </div>
+            </div>
+        </div> </div> <section class="contact-form-section" id="contact-section">
+        <h2>Contact Us</h2>
+        <form action="#" method="POST" class="contact-form">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required placeholder="Enter your full name">
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" required placeholder="example@domain.com">
+            </div>
+            <div class="form-group">
+                <label for="subject">Subject:</label>
+                <input type="text" id="subject" name="subject" required placeholder="e.g., Technical Support, Inquiry...">
+            </div>
+            <div class="form-group">
+                <label for="message">Message / Description:</label>
+                <textarea id="message" name="message" cols="50" rows="10" required placeholder="Please provide details about your request..."></textarea>
+            </div>
+            <button type="submit" class="submit-button">Send Message</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 AUNS. All rights reserved.</p>
+    </footer>
+
+    <script src="app.js"></script> 
+</body>
+
+</html>

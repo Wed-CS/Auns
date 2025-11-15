@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Video Management Dashboard</title>
+</head>
+<body>
+
+<div class="container">
+    <h1>Video Management Dashboard</h1>
+    <p>Welcome! Manage your video files below.</p>
+
+    <div class="controls">
+        <button onclick="showSection('add-video')">Add New Video</button>
+        <button onclick="showSection('video-list')">View All Videos</button>
+    </div>
+
+    <hr>
+
+    <div id="video-list">
+        <h2>Your Videos List</h2>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Producer</th>
+                    <th>Age Rating</th>
+                    <th>Category</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr id="video-1">
+                    <td>101</td>
+                    <td>mansour ep1</td>
+                    <td>Abu Dhabi Media Network</td>
+                    <td>+3 years</td>
+                    <td>Cartoon</td>
+                    <td>
+                        <button onclick="showEditForm(101)">Edit</button>
+                        <button onclick="confirmDelete(101, 'mansour ep1')">Delete</button>
+                    </td>
+                </tr>
+                <tr id="video-2">
+                    <td>102</td>
+                    <td>mansour ep2</td>
+                    <td>Abu Dhabi Media Network</td>
+                    <td>+3 years</td>
+                    <td>Cartoon</td>
+                    <td>
+                        <button onclick="showEditForm(102)">Edit</button>
+                        <button onclick="confirmDelete(102, 'mansour ep2')">Delete</button>
+                    </td>
+                </tr>
+                <tr id="video-3">
+                    <td>103</td>
+                    <td>mansour ep3</td>
+                    <td>Abu Dhabi Media Network</td>
+                    <td>+3 years</td>
+                    <td>Cartoon</td>
+                    <td>
+                        <button onclick="showEditForm(103)">Edit</button>
+                        <button onclick="confirmDelete(103, 'mansour ep3')">Delete</button>
+                    </td>
+                </tr>
+                </tbody>
+        </table>
+    </div>
+
+    <div id="add-video" class="form-section" style="display: none;">
+        <h2>Add New Video</h2>
+        <form action="/api/videos/add" method="POST">
+            <label for="add-name">Video Name:</label>
+            <input type="text" id="add-name" name="name" required><br><br>
+
+            <label for="add-description">Description:</label>
+            <textarea id="add-description" name="description" rows="3" required></textarea><br><br>
+
+            <label for="add-link">Video Link (URL):</label>
+            <input type="url" id="add-link" name="link" required><br><br>
+
+            <label for="add-producer">Production Company:</label>
+            <input type="text" id="add-producer" name="producer" required><br><br>
+
+            <label for="add-rating">Age Rating:</label>
+            <select id="add-rating" name="rating" required>
+                <option value="">-- Select Rating --</option>
+                <option value="6m">+6 months</option>
+                <option value="1y">+1 year</option>
+                <option value="3y">+3 years</option>
+                <option value="6y">+6 years</option>
+                <option value="12y">+12 years</option>
+            </select><br><br>
+
+            <label for="add-category">Category:</label>
+            <select id="add-category" name="category" required>
+                <option value="">-- Select Category --</option>
+                <option value="cartoon">Cartoon</option>
+                <option value="movie">Movie</option>
+                <option value="islam">Islam</option>
+                <option value="games">Games</option>
+            </select><br><br>
+
+            <button type="submit">Create Video</button>
+        </form>
+    </div>
+
+    <div id="edit-video" class="form-section" style="display: none;">
+        <h2>Edit Video <span id="editing-video-name"></span></h2>
+        <form id="edit-form" action="/api/videos/edit" method="POST">
+            <input type="hidden" id="edit-video-id" name="video_id" value="">
+            
+            <p>Modify the details below:</p>
+            
+            <label for="edit-name">Video Name:</label>
+            <input type="text" id="edit-name" name="name"><br><br>
+
+            <label for="edit-description">Description:</label>
+            <textarea id="edit-description" name="description" rows="3"></textarea><br><br>
+
+            <label for="edit-link">Video Link (URL):</label>
+            <input type="url" id="edit-link" name="link"><br><br>
+
+            <label for="edit-producer">Production Company:</label>
+            <input type="text" id="edit-producer" name="producer"><br><br>
+
+            <label for="edit-rating">Age Rating:</label>
+            <select id="edit-rating" name="rating">
+                <option value="">-- Select Rating --</option>
+                <option value="6m">+6 months</option>
+                <option value="1y">+1 year</option>
+                <option value="3y">+3 years</option>
+                <option value="6y">+6 years</option>
+                <option value="12y">+12 years</option>
+            </select><br><br>
+
+            <label for="edit-category">Category:</label>
+            <select id="edit-category" name="category">
+                <option value="">-- Select Category --</option>
+                <option value="cartoon">Cartoon</option>
+                <option value="movie">Movie</option>
+                <option value="islam">Islam</option>
+                <option value="games">Games</option>
+            </select><br><br>
+
+            <button type="submit">Save Changes</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function showSection(sectionId) {
+        document.getElementById('video-list').style.display = 'none';
+        document.getElementById('add-video').style.display = 'none';
+        document.getElementById('edit-video').style.display = 'none';
+        
+        document.getElementById(sectionId).style.display = 'block';
+    }
+
+    function showEditForm(videoId) {
+        showSection('edit-video');
+        document.getElementById('edit-video-id').value = videoId;
+        document.getElementById('editing-video-name').textContent = `(ID: ${videoId} - Details must be fetched)`;
+    }
+
+    function confirmDelete(videoId, videoName) {
+        if (confirm(`Are you sure you want to delete the video: "${videoName}" (ID: ${videoId})?`)) {
+            alert(`Video with ID ${videoId} has been marked for deletion.`);
+        }
+    }
+    
+    showSection('video-list');
+</script>
+
+</body>
+</html>

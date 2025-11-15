@@ -1,0 +1,279 @@
+ :root {
+            --color-bg-light: #fffff9;       /* خلفية وردية فاتحة جداً */
+    --color-primary-fun: #936bf1;    /* أحمر مرجاني/وردي حيوي (للعناوين) */
+    --color-secondary-fun: #00bcd4;   /* أزرق سماوي نقي (للمميزات) */
+    --color-cta-prominent: #bfc0fc;  /* أخضر ليموني ساطع (لزري Sign Up) */
+    --color-text-dark: #37300a;
+    --color-text-highlight: #8d94ef; /* برتقالي للمسافات البارزة */
+    --color-transparent-overlay: rgba(255, 255, 255, 0.75); /* خلفية شفافة */
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--color-bg-light);
+            color: var(--color-text-dark);
+            direction: ltr; /* English is Left-to-Right */
+            text-align: left;
+        }
+        
+        /* New H2 style for the main title above the card */
+        .main-card-title {
+            font-family: 'Bungee Shade', cursive;
+            color: var(--color-primary-fun);
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2.5em; /* Larger title */
+        }
+
+     
+    header {
+    background-color: white;
+    padding: 18px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky; 
+    top: 0;
+    z-index: 1000; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); 
+}
+
+/* تحويل الروابط إلى أزرار دائرية */
+header nav a {
+    text-decoration: none;
+    color: var(--color-text-dark);
+    margin-left: 10px;
+    padding: 8px 15px; 
+    font-weight: 600;
+    border: 2px solid transparent; /* إضافة حدود لتأثير الزر */
+    border-radius: 25px; /* شكل دائري/بيضاوي للأزرار */
+    transition: all 0.3s;
+}
+
+header nav a:hover {
+    color: var(--color-primary-fun);
+    border-color: var(--color-primary-fun);
+}
+
+/* تنسيق زر Sign Up المميز (دائري ولون مختلف) */
+.signup-button {
+    background-color: var(--color-cta-prominent); 
+    color: white !important;
+    padding: 10px 22px;
+    border-radius: 50px; /* دائري جداً */
+    font-weight: 700;
+    margin-left: 25px;
+    box-shadow: 0 4px 8px rgba(139, 195, 74, 0.4);
+    transition: all 0.3s;
+}
+
+.signup-button:hover {
+    transform: scale(1.05);
+    background-color: #c0caff;
+}
+
+        /* -------------------------------------------
+           Profile Main Section - Layout and Card
+        ------------------------------------------- */
+        .profile-main {
+            padding-top: 50px;
+            padding-bottom: 50px;
+            background: linear-gradient(145deg, #fce4ec 0%, #fffde7 100%); /* Hero background */
+            border-radius: 0 0 50px 50px; 
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center; /* Center the card and the main title */
+        }
+
+        .profile-card {
+            max-width: 450px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 30px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            position: relative;
+            /* No text-align: center here, we will align elements individually */
+        }
+
+        /* Profile Picture & Level Badge */
+        .profile-picture-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 25px;
+        }
+        
+        .profile-picture {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid var(--color-primary-fun);
+            object-fit: cover;
+            box-shadow: 0 0 0 8px var(--color-secondary-fun); 
+            transition: transform 0.3s;
+            display: flex;
+            align-items: center; 
+            justify-content: center;
+        }
+        
+        .profile-picture:hover {
+            transform: scale(1.05) rotate(3deg);
+        }
+        
+        .level-badge {
+            position: absolute;
+            bottom: 5px;
+            right: 5px; /* LTR Position */
+            background-color: var(--color-primary-fun);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            border: 3px solid white;
+        }
+
+        /* Form Fields */
+        .form-group-profile {
+            margin-bottom: 20px;
+            text-align: left; /* Essential to align labels/inputs left inside the card */
+        }
+        
+        .form-group-profile label,
+        .detail-label-input {
+            display: block;
+            font-weight: 600;
+            color: var(--color-primary-fun);
+            margin-bottom: 5px;
+        }
+        
+        .profile-card input[type="text"],
+        .profile-card input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            font-size: 1.1em;
+            box-sizing: border-box;
+            text-align: left; /* LTR Input alignment */
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        
+        .profile-card input:focus {
+            border-color: var( --color-primary-fun); 
+            box-shadow: 0 0 0 4px rgba(151, 46, 249, 0.2);
+            outline: none;
+        }
+        
+        .child-details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+            text-align: left; /* Ensure grid items start from the left */
+        }
+        
+        .child-slogan {
+            font-style: italic;
+            color: #666;
+            margin-top: 20px;
+            text-align: center; /* Center the slogan */
+        }
+        
+        /* Save Button Container */
+        .save-button-container {
+            text-align: center; /* This ensures the button is centered horizontally */
+        }
+
+        /* Save Button */
+        .save-button {
+            background-color: var(--color-cta-prominent);
+            color: var(--color-bg-light);
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin-top: 25px;
+            box-shadow: 0 6px 15px rgba(191, 192, 252, 0.8);
+            transition: all 0.3s;
+            display: inline-block; /* Essential for button to respect text-align: center of its parent */
+        }
+        
+        .save-button:hover {
+            background-color: #a4a5e0;
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(191, 192, 252, 1);
+        }
+
+        /* -------------------------------------------
+           Confirmation/Error Message (Modal)
+        ------------------------------------------- */
+        .status-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-weight: 600;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: opacity 0.5s, transform 0.5s;
+            opacity: 0;
+            transform: translateX(100%);
+        }
+
+        .status-message.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .status-message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status-message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+
+        /* -------------------------------------------
+           Footer Styles
+        ------------------------------------------- */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: rgb(126, 25, 234);
+            color: white;
+            font-size: 0.9em;
+        }
+        
+        /* -------------------------------------------
+           Responsive Adjustments
+        ------------------------------------------- */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+            }
+            nav {
+                margin-top: 10px;
+            }
+            nav a {
+                margin: 5px 10px;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .child-details-grid {
+                grid-template-columns: 1fr;
+            }
+            .profile-card {
+                padding: 20px;
+            }
+        }

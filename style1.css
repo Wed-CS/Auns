@@ -1,0 +1,301 @@
+/* ============================================== */
+/* === 1. تنسيقات صفحة المقال (Article Layout) === */
+/* ============================================== */
+
+.article-layout {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.article-layout body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 100%;
+  color: #2E2E2E;
+  margin: 0;
+  padding: 0;
+  background-color: #F8FDFF;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.article-layout .abu-image {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.article-layout .abu-image img {
+  width: 35%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.article-layout h1 {
+  font-size: 220%;
+  color: #F6D883;
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+.article-layout h2 {
+  font-size: 160%;
+  color: #CFC0F2;
+  text-align: center;
+}
+
+.article-layout h3 {
+  font-size: 130%;
+  color: #CFC0F2;
+  text-align: center;
+}
+
+.article-layout .intro {
+  font-size: 100%;
+  line-height: 180%;
+  text-indent: 5%;
+}
+
+.article-layout p {
+  font-size: 90%;
+  line-height: 180%;
+  text-indent: 5%;
+}
+
+.article-layout .highlight {
+  font-weight: bold;
+  background-color: #F6D883;
+}
+
+.article-layout blockquote {
+  font-style: italic;
+  border-left: 4px solid #AAA3A1;
+  padding-left: 0.5em;
+  margin-left: 0;
+  font-size: 95%;
+}
+
+.article-layout a {
+  font-size: 100%;
+  text-decoration: none;
+  color: #2DACE3;
+}
+
+.article-layout a:hover {
+  text-decoration: underline;
+  color: #F6D883;
+}
+
+.article-layout main {
+  width: 85%;
+  margin: 30px auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 30px;
+  box-sizing: border-box;
+}
+
+.article-layout article {
+  width: 70%;
+  box-sizing: border-box;
+}
+
+.article-layout aside {
+  width: 30%;
+  background-color: #FDF8E7;
+  border: 1px solid #AAA3A1;
+  border-radius: 10px;
+  padding: 20px;
+  box-sizing: border-box;
+  font-size: 90%;
+  align-self: stretch;
+}
+
+.article-layout footer {
+  clear: both;
+  background-color: #CFC0F2;
+  color: #797777;
+  text-align: center;
+  padding: 20px 0;
+  font-size: 100%;
+  margin-top: auto;
+}
+/* فقرة الفوتر لها تنسيق خاص */
+.article-layout footer p {
+  text-indent: 0; /* إلغاء المسافة البادئة */
+  margin: 0;
+  padding: 0;
+}
+
+
+.article-layout .custom-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.article-layout .custom-list li {
+  /* التعديلات لزيادة حجم الصورة */
+  background-size: 60px 60px;  /* ضاعفنا الحجم (كان 30px) */
+  padding-left: 75px;     /* زدنا المسافة لليسار (60px للصورة + 15px هامش) */
+  margin-bottom: 15px;    /* زدنا المسافة بين العناصر */
+  
+  /* لضمان توسيط النص عمودياً مع الصورة الجديدة */
+  display: flex;
+  align-items: center;
+  min-height: 60px; /* لضمان ارتفاع مناسب للصورة */
+
+  /* (خصائص سابقة لم تتغير) */
+  background-repeat: no-repeat;
+  background-position: left center;
+  font-size: 90%;
+  
+  /* (line-height لم نعد بحاجته بسبب flex) */
+  /* line-height: 1.8; */
+}
+.article-layout .Kaslaan {
+  background-image: url('Kaslaan.png');
+}
+
+.article-layout .Zakiya {
+  background-image: url('3.png');
+}
+
+.article-layout .Mansour {
+  background-image: url('2.png');
+}
+
+
+/* ======================================================== */
+/* === 2. تنسيقات صفحة بروفايل الطفل (Profile Layout) === */
+/* ======================================================== */
+
+.profile-layout body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background-color: #F8FDFF;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.child-profile-card {
+  width: 850px;
+  background-color: #FDF8E7;
+  border-radius: 20px;
+  border: 2px solid #AAA3A1;
+  padding: 25px 30px;
+  box-sizing: border-box;
+}
+
+.child-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.child-header button {
+  all: unset;
+  cursor: pointer;
+  font-size: 1.8rem;
+  color: #404040;
+}
+
+.child-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+.child-image {
+  width: 140px;
+  height: 140px;
+  background: center/cover no-repeat;
+  border-radius: 50%;
+  border: 5px solid #F8FDFF;
+}
+
+.child-name {
+  color: #404040;
+  font-size: 1.8rem;
+  text-align: center;
+  margin: 0;
+}
+
+.child-age-gender {
+  color: #797777;
+  font-size: 1.1rem;
+  text-align: center;
+  margin: 0;
+}
+
+/* هذا الـ h3 لن يتعارض مع h3 في صفحة المقال */
+.watched-videos h3 {
+  color: #CFC0F2;
+  font-size: 1.5rem;
+  text-align: left;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.videos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.video-item img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+/* هذا الـ p لن يتعارض مع p في صفحة المقال */
+.video-item p {
+  text-align: center;
+  font-size: 1rem;
+  color: #2E2E2E;
+  margin-top: 4px;
+  font-weight: bold;
+}
+
+/* ================================= */
+/* === 3. تنسيقات الميديا (Media) === */
+/* ================================= */
+
+@media screen and (max-width: 768px) {
+  
+  /* Profile Responsive */
+  .profile-layout .child-profile-card {
+    width: 95%;
+    padding: 15px;
+  }
+  .profile-layout .child-image {
+    width: 110px;
+    height: 110px;
+  }
+  .profile-layout .videos-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Article Responsive */
+  .article-layout main {
+    width: 95%;
+    flex-direction: column;
+  }
+  .article-layout article,
+  .article-layout aside {
+    width: 100%;
+  }
+  
+  .article-layout .abu-image img {
+    width: 60%; /* مثال: تكبير اللوجو قليلاً في الموبايل */
+  }
+}
